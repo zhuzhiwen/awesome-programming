@@ -1,6 +1,5 @@
-
+#!/usr/bin/python
 import pickle
-
 from athletelist import AthleteList
 
 def get_coach_data(filename):
