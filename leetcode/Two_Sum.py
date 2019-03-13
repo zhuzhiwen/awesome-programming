@@ -22,5 +22,5 @@ class Solution:
         return None
 
 l = [2, 7, 11, 15]
-s = Solution().twoSum(l, 18)
+s = Solution().twoSum(l, 4)
 print(s)
