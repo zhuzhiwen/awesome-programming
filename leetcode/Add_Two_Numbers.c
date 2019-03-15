@@ -3,7 +3,9 @@
  * Add the two numbers and return it as a linked list.You may assume the two numbers do
  * not contain any leading zero, except the number 0 itself.
  */
+
 #include <stdio.h>
+
 
 struct ListNode{
     int val;
@@ -24,6 +26,7 @@ struct ListNode* createList(int *numArray, int nums)
     }
 
 }
+
 
 struct ListNode* addTwoNumbers(struct ListNode* l1, struct ListNode* l2)
 {
