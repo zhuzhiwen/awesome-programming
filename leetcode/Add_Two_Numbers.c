@@ -6,69 +6,64 @@
 
 #include <stdio.h>
 
-
 struct ListNode{
     int val;
     struct ListNode *next;
 };
 
-struct ListNode* createList(int *numArray, int nums)
+struct ListNode* addTwoNumbers(struct ListNode *l1, struct ListNode *l2)
 {
-    int i;
-    struct ListNode *head, *p;
-    if (nums == NULL || nums == 0) {
+    struct ListNode *p1, *p2, *p3, *pNewNode, *pHead;
+    int val1, val2, val3, carry;
+    if (l1 == NULL || l2 == NULL ) {
         return NULL;
     }
 
-    for (i = 0; i < nums; i++) {
-        p = (struct ListNode*)malloc(sizeof(struct ListNode));
-        p->val = numArray[i];
-    }
+    p3 = (struct ListNode*)malloc(sizeof(struct ListNode));
+    pHead = p3;
+    p1 = l1;
+    p2 = l2;
+    carry = 0;
 
-}
-
-
-struct ListNode* addTwoNumbers(struct ListNode* l1, struct ListNode* l2)
-{
-    struct ListNode *p, *head, *new;
-    int carry, val1, val2, tmpVal;
-
-    carry = val1 = val2 = 0;
-    head = (struct ListNode*)malloc(sizeof(struct ListNode));
-    p = head;
-
-    while (l1 != NULL || l2 != NULL || carry) {
-        if (l1 != NULL) {
-            val1 = l1->val;
+    while (p1 || p2 || carry) {
+        if (p1 != NULL) {
+            val1 = p1->val;
         } else {
             val1 = 0;
         }
 
-        if (l2 != NULL) {
-            val2 = l2->val;
+        if (p2 != NULL) {
+            val2 = p2->val;
         } else {
             val2 = 0;
         }
 
-        tmpVal = val1 + val2 + carry;
-        if (tmpVal >= 10) {
-            carry = 1;
-            tmpVal = 0;
-        } else {
-            carry = 0;
+        val3 = val1 + val2 + carry;
+        carry = val3 / 10;
+        val3 = val3 % 10;
+
+        pNewNode = (struct ListNode*)malloc(sizeof(struct ListNode));
+        pNewNode->val = val3;
+        pNewNode->next = NULL;
+        printf("%d\tcarry=%d\n", val3, carry);
+        p3->next = pNewNode;
+        p3 = p3->next;
+        if (p1) {
+            p1 = p1->next;
         }
-
-        new = (struct ListNode*)malloc(sizeof(struct ListNode));
-        p->val = tmpVal;
-        p->next = new;
-        p = new;
-        p->next = NULL;
+        if (p2) {
+            p2 = p2->next;
+        }
     }
-    free(p);
-    return head;
+    p3 = pHead;
+    pHead = pHead->next;
+    free(p3);
+    return pHead;
 }
 
-void test()
-{
-
-}
+/**
+ * testcase:
+ * input    [2,4,3]
+ *          [5,6,4]
+ * expected [7,0,8]
+ */
